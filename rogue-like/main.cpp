@@ -1,12 +1,21 @@
-#include "curses.h"
+#include <curses.h>
+#include "Map.h"
+#include "Game.h"
 
-int main()
-{
-    initscr();                    /* Start curses mode */
-    printw("Hello World !!!");    /* Print Hello World */
-    refresh();                    /* Print it on to the real screen */
-    getch();                      /* Wait for user input */
-    endwin();                     /* End curses mode */
 
-    return 0;
+int main() {
+	initscr();
+	noecho();
+	cbreak();
+	keypad(stdscr, TRUE);
+	curs_set(0);
+	clear();
+	
+	Map m;
+	Game g(m);
+
+	g.GameLoop();
+	endwin();
+
+	return 0;
 }
